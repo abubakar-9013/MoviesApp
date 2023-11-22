@@ -8,7 +8,7 @@
 import Foundation
 
 enum ApiService {
-    case getNowPlayingMovies
+    case getPopularMovies
     case getMovieDetail(movieId: Int)
 }
 
@@ -16,15 +16,15 @@ extension ApiService {
     
     var baseURL: URL {
         switch self {
-        case .getNowPlayingMovies, .getMovieDetail:
+        case .getPopularMovies, .getMovieDetail:
             return AppConst.baseURL
         }
     }
     
     var path: String {
         switch self {
-        case .getNowPlayingMovies:
-            return "/now_playing"
+        case .getPopularMovies:
+            return "/popular"
         case .getMovieDetail(movieId: let movieId):
             return "\(movieId)"
         }
@@ -32,7 +32,7 @@ extension ApiService {
     
     var parameters: [String : CustomStringConvertible] {
         switch self {
-        case .getNowPlayingMovies, .getMovieDetail(movieId: _):
+        case .getPopularMovies, .getMovieDetail(movieId: _):
             let parameters: [String : CustomStringConvertible] = [
                 "api_key": AppConst.apiKey,
                 "language": Locale.preferredLanguages[0]

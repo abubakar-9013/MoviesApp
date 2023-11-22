@@ -37,7 +37,7 @@ struct HomeView: View {
                     .background(Color(uiColor: .systemBackground))
                 }
             }
-            .navigationTitle("Now Playing")
+            .navigationTitle("Popular Movies")
             .onAppear {
                 viewModel.getMovies()
             }

@@ -21,7 +21,7 @@ class MovieVM: ObservableObject {
     
     func getMovies() {
         isLoading = true
-        networkAdapter.request(target: .getNowPlayingMovies, completion: {(response: NowPlayingMovies!, hasError: String?) in
+        networkAdapter.request(target: .getPopularMovies, completion: {(response: PopularMovies!, hasError: String?) in
             
             self.isLoading = false
             if let error = hasError{
