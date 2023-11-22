@@ -34,7 +34,7 @@ extension ApiService {
         switch self {
         case .getPopularMovies, .getMovieDetail(movieId: _):
             let parameters: [String : CustomStringConvertible] = [
-                "api_key": AppConst.apiKey,
+                "api_key": Environment.apiKey,
                 "language": Locale.preferredLanguages[0]
             ]
             return parameters

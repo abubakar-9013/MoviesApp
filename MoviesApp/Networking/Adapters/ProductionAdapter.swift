@@ -25,7 +25,6 @@ class ProductionAdapter: NetworkProtocol {
             return
         }
         let urlRequest = URLRequest(url: url)
-        print(urlRequest)
 
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
