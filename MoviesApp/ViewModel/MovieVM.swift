@@ -5,14 +5,33 @@
 //  Created by Muhammad Abubakar on 20/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 class MovieVM: ObservableObject {
+    
+    enum Error: LocalizedError {
+        case errorFetching
+
+        var errorDescription: String? {
+            switch self {
+            case .errorFetching:
+                return "Error"
+            }
+        }
+
+        var recoverySuggestion: String? {
+            switch self {
+            case .errorFetching:
+                return "Unable to fetch data"
+            }
+        }
+    }
     
     private var networkAdapter: NetworkProtocol
     var selectedMovie: Result?
     @Published var movies: [Result] = []
     @Published var isLoading = false
+    @Published var movieError: Swift.Error?
     
     
     init() {
@@ -24,8 +43,8 @@ class MovieVM: ObservableObject {
         networkAdapter.request(target: .getPopularMovies, completion: {(response: PopularMovies!, hasError: String?) in
             
             self.isLoading = false
-            if let error = hasError{
-                print(error)
+            if hasError != nil {
+                self.movieError = Error.errorFetching
             }
             if let movies = response {
                 DispatchQueue.main.async { [weak self] in
@@ -35,5 +54,3 @@ class MovieVM: ObservableObject {
         })
     }
 }
-
-

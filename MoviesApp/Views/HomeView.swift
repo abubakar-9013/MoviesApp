@@ -47,6 +47,7 @@ struct HomeView: View {
                 MovieDetailView(selctedMovie: movie)
             }
         })
+        .errorAlert(error: $viewModel.movieError)
     }
 }
 
